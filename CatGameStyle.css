@@ -57,15 +57,22 @@ body    {
     background: #eeeeee;
 }
 
-#catsDisplay    {
-    font-size: 400%;
+.catsDisplay    {
+    font-size: 300%;
     position: relative;
     top: 0;
+    padding: 10px;
+}
+
+#lifetimeCatsDisplay    {
+    float: right;
+    position: relative;
+    font-size: 150%;
+    margin: 15px;
 }
 
 #catButton  {
     border: none;
-    font-size: 1200%;
     background-color: inherit;
     margin: 0;
 }
@@ -73,12 +80,13 @@ body    {
 .catDisplayBox  {
     width: 100%;
     display: block;
+    background: lightskyblue;
 }
 
 .shopList  {
     border: none;
     text-align: center;
-    margin: 5px 0 5px 25px;
+    margin: 3px 0 3px 15px;
     float: left;
     width: 100%;
 }
@@ -107,4 +115,12 @@ body    {
     width: 50px;
     font-size: 180%;
     text-align: center;
+}
+
+.categoryHeader   {
+    font-size: 300%;
+    color: #333333;
+    padding: 10px;
+    background: palegoldenrod;
+    margin-bottom: 5px;
 }

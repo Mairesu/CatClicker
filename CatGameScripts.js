@@ -1,6 +1,7 @@
 var UPDATETIME = 100;
 
 var cats = 0;
+var lifetimeCats = 0;
 
 var catnip = 0;
 var catnipPrice = 100;
@@ -12,13 +13,16 @@ var catLadiesUnlocked = false;
 
 
 function increaseCatsOnClick() {
-    //cats += Math.floor(Math.pow(1.0718, catnip));
-    cats += Math.exp(0.0669 * catnip);
+    var catIncrease = Math.exp(0.0291 * catnip);
+    cats += catIncrease;
+    lifetimeCats += catIncrease;
     updateCats();
 }
 
 function increaseCats() {
-    cats += (Math.exp(0.083 * catLadies) - 1); //Make Crazy cat ladies strong for late game
+    var catIncrease = (Math.exp(0.0433 * catLadies) - 1);
+    cats += catIncrease;
+    lifetimeCats += catIncrease;
     updateCats();
 }
 setInterval(increaseCats, UPDATETIME);
@@ -26,6 +30,7 @@ setInterval(increaseCats, UPDATETIME);
 
 function updateCats()   {
     document.getElementById("catCount").innerHTML = Math.floor(cats);
+    document.getElementById("lifetimeCatCount").innerHTML = Math.floor(lifetimeCats);
     if(!catnipUnlocked)    {
         unlockCatnip()
     }
@@ -57,7 +62,7 @@ function buyCatnip()    {
     if(cats >= catnipPrice)    {
         cats -= catnipPrice;
         catnip ++;
-        catnipPrice = Math.pow(100, (1 + (0.0212*catnip))); //Adjust price to use exponential
+        catnipPrice = (100 + 2*catnip + (Math.exp(0.0655 * catnip) - 1)); //Adjust price to use exponential
         document.getElementById("catnipPrice").innerHTML = Math.floor(catnipPrice);
         document.getElementById("catnipCount").innerHTML = catnip;
         updateCats();
@@ -87,7 +92,7 @@ function buyCatLadies()    {
     if(cats >= catLadiesPrice)    {
         cats -= catLadiesPrice;
         catLadies ++;
-        catLadiesPrice = Math.pow(250, (1 + (0.0212*catLadies))); //Adjust price to use exponential
+        catLadiesPrice = (250 + 2.5*catLadies + (Math.exp(0.0989 * catLadies) - 1)); //Adjust price to use exponential
         document.getElementById("catLadyPrice").innerHTML = Math.floor(catLadiesPrice);
         document.getElementById("catLadyCount").innerHTML = catLadies;
         updateCats();
