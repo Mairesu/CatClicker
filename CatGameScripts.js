@@ -92,7 +92,7 @@ function buyCatLadies()    {
     if(cats >= catLadiesPrice)    {
         cats -= catLadiesPrice;
         catLadies ++;
-        catLadiesPrice = (250 + 2.5*catLadies + (Math.exp(0.0989 * catLadies) - 1)); //Adjust price to use exponential
+        catLadiesPrice = (250 + 2.5*catLadies + (Math.exp(0.0930 * catLadies) - 1)); //Adjust price to use exponential
         document.getElementById("catLadyPrice").innerHTML = Math.floor(catLadiesPrice);
         document.getElementById("catLadyCount").innerHTML = catLadies;
         updateCats();
