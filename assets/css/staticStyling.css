@@ -1,0 +1,33 @@
+/*
+Navbar
+*/
+.top-navbar {
+    background-color: purple;
+    border-bottom: 10px solid black;
+}
+
+.menuOptions {
+    font-size: 30px;
+    float: right;
+    padding-left: 40px;
+}
+
+.copyright > h3 {
+    font-size: 30px;
+}
+
+.menuOptions, .copyright > h3 {
+    margin: 20px auto;
+    color: white;
+}
+
+/*
+Sections
+*/
+section {
+    padding: 0 !important;
+}
+
+#cat-section, #upgrades-section {
+    border-right: 10px solid black;
+}

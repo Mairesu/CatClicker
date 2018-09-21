@@ -51,7 +51,6 @@ table {
 
 /*Own CSS*/
 
-
 body    {
     font-family: helvetica;
     background: #eeeeee;
@@ -81,6 +80,7 @@ body    {
     width: 100%;
     display: block;
     background: lightskyblue;
+    padding-left: 15px;
 }
 
 .shopList  {
