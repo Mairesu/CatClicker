@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../styles/App.css';
+import '../styles/Game.css';
 import CatCounter from '../visual/CatCounter';
 
 //Component representing the game logic
@@ -24,49 +24,50 @@ class Game extends Component {
     }
 
     //Game tick for passive cat generation
-    //TODO implement passive increment methods using catnip and crazy cat ladies
     doGameTick() {
         setInterval(() => {
             this.incrementCatsFromCatladies();
             this.incrementCatsFromCatnip();
             console.log("Cats: " + this.getCats());
-        }, 1000/this.state.ticksPerSeconds)
+        }, 1000 / this.state.ticksPerSeconds)
     }
 
     //TODO put these in their own components (maybe(?)) (Technically game logic so should probably be here)
     //TODO Rewrite formulas and round them to whole numbers
     incrementCatsFromCatladies() {
         this.setState({
-            cats: this.getCats() + 0.05*(this.state.crazyCatLadies),
+            cats: this.getCats() + 0.05 * (this.state.crazyCatLadies)
         });
     }
 
-    incrementCatsFromCatnip()   {
+    incrementCatsFromCatnip() {
         this.setState({
-            cats: this.getCats() + 0.02*(this.state.catNip),
+            cats: this.getCats() + 0.02 * (this.state.catNip)
         });
-    }
-
-    getCats()   {
-        return this.state.cats;
     }
 
     incrementCats() {
         this.setState({
             cats: this.getCats() + 1
-        })
+        });
+    }
 
+    getCats() {
+        return this.state.cats;
     }
 
     render() {
         return (
             <div className="App">
+                <button onClick={e => this.incrementCats()}>
                     <header className="App-header">
-                        <CatCounter cats={this.getCats()} />
+                        <CatCounter cats={this.getCats()}/>
                     </header>
+                </button>
             </div>
         );
     }
+
 }
 
 export default Game;
