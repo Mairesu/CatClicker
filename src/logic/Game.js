@@ -14,8 +14,11 @@ class Game extends Component {
             cats: 0,
             lifetimeCats: 0,
 
-            catNip: 3,
-            crazyCatLadies: 2,
+            catnip: 0,
+            basePrice_catnip: 10,
+
+            crazyCatLadies: 0,
+            basePrice_catladies: 50,
         }
     }
 
@@ -28,42 +31,105 @@ class Game extends Component {
         setInterval(() => {
             this.incrementCatsFromCatladies();
             this.incrementCatsFromCatnip();
-            console.log("Cats: " + this.getCats());
+            console.log("Cats: " + this.state.cats);
         }, 1000 / this.state.ticksPerSeconds)
     }
 
     //TODO put these in their own components (maybe(?)) (Technically game logic so should probably be here)
-    //TODO Rewrite formulas and round them to whole numbers
-    incrementCatsFromCatladies() {
-        this.setState({
-            cats: this.getCats() + 0.05 * (this.state.crazyCatLadies)
-        });
-    }
 
     incrementCatsFromCatnip() {
         this.setState({
-            cats: this.getCats() + 0.02 * (this.state.catNip)
+            cats: this.state.cats + (0.2 / this.state.ticksPerSeconds) * (this.state.catnip)
+        });
+    }
+
+    incrementCatsFromCatladies() {
+        this.setState({
+            cats: this.state.cats + (1.2 / this.state.ticksPerSeconds) * (this.state.crazyCatLadies)
         });
     }
 
     incrementCats() {
         this.setState({
-            cats: this.getCats() + 1
+            cats: this.state.cats + 1
         });
     }
 
-    getCats() {
-        return this.state.cats;
+    incrementCatnip() {
+        this.setState({
+            catnip: this.state.catnip + 1
+        });
+    }
+
+    incrementCatladies() {
+        this.setState({
+            crazyCatLadies: this.state.crazyCatLadies + 1
+        });
+    }
+
+    getCatnipPrice() {
+        return Math.ceil(this.state.basePrice_catnip * Math.pow(1.2, this.state.catnip));
+    }
+
+    getCatladiesPrice() {
+        return Math.ceil(this.state.basePrice_catladies * Math.pow(1.2, this.state.crazyCatLadies));
+    }
+
+    //TODO check if can buy, increase amount and remove cats
+    buyCatnip() {
+        if(this.state.cats >= this.getCatnipPrice())   {
+            this.setState({
+                cats: this.state.cats - this.getCatnipPrice()
+            });
+            this.incrementCatnip();
+        }
+    }
+
+    buyCatladies() {
+        if(this.state.cats >= this.getCatladiesPrice())   {
+            this.setState({
+                cats: this.state.cats - this.getCatladiesPrice()
+            });
+            this.incrementCatladies();
+        }
     }
 
     render() {
         return (
-            <div className="App">
-                <button onClick={e => this.incrementCats()}>
-                    <header className="App-header">
-                        <CatCounter cats={this.getCats()}/>
-                    </header>
-                </button>
+            <div>
+                <ul>
+                    <li>
+                        <button className="CatButton" onClick={e => this.incrementCats()}>
+                            <header>
+                                <CatCounter cats={this.state.cats}/>
+                            </header>
+                        </button>
+                    </li>
+                    <li>
+                        <header>
+                            Catnip: {this.state.catnip}
+                        </header>
+                    </li>
+                    <li>
+                        <button className="CatButton" onClick={e => this.buyCatnip()}>
+                            <header>
+                                Buy catnip: {this.getCatnipPrice()}
+                            </header>
+                        </button>
+                    </li>
+                    <li>
+                        <header>
+                            Crazy catladies: {this.state.crazyCatLadies}
+                        </header>
+                    </li>
+                    <li>
+                        <button className="CatLady" onClick={e => this.buyCatladies()}>
+                            <header>
+                                Buy crazy cat lady: {this.getCatladiesPrice()}
+                            </header>
+                        </button>
+                    </li>
+                </ul>
             </div>
         );
     }

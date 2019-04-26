@@ -10,7 +10,7 @@ class CatCounter extends React.Component{
     render() {
         return (
             <div>
-                Cats: {Math.round(this.props.cats)}{'\n'}
+                Cats: {Math.floor(this.props.cats)}{'\n'}
             </div>
         );
     }
