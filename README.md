@@ -1,1 +1,1 @@
-Write something here later
+Clicker game made in React JS
