@@ -5,8 +5,8 @@ import CatCounter from '../visual/CatCounter';
 //Component representing the game logic
 class Game extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             ticksPerSeconds: 10,
 
@@ -31,11 +31,9 @@ class Game extends Component {
         setInterval(() => {
             this.incrementCatsFromCatladies();
             this.incrementCatsFromCatnip();
-            console.log("Cats: " + this.state.cats);
         }, 1000 / this.state.ticksPerSeconds)
     }
 
-    //TODO put these in their own components (maybe(?)) (Technically game logic so should probably be here)
 
     incrementCatsFromCatnip() {
         this.setState({
@@ -45,7 +43,7 @@ class Game extends Component {
 
     incrementCatsFromCatladies() {
         this.setState({
-            cats: this.state.cats + (1.2 / this.state.ticksPerSeconds) * (this.state.crazyCatLadies)
+            cats: this.state.cats + (0.666 / this.state.ticksPerSeconds) * (this.state.crazyCatLadies)
         });
     }
 
@@ -68,14 +66,13 @@ class Game extends Component {
     }
 
     getCatnipPrice() {
-        return Math.ceil(this.state.basePrice_catnip * Math.pow(1.2, this.state.catnip));
+        return Math.ceil(this.state.basePrice_catnip * Math.pow(1.1, this.state.catnip));
     }
 
     getCatladiesPrice() {
-        return Math.ceil(this.state.basePrice_catladies * Math.pow(1.2, this.state.crazyCatLadies));
+        return Math.ceil(this.state.basePrice_catladies * Math.pow(1.22, this.state.crazyCatLadies));
     }
 
-    //TODO check if can buy, increase amount and remove cats
     buyCatnip() {
         if(this.state.cats >= this.getCatnipPrice())   {
             this.setState({
